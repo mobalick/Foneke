@@ -1,0 +1,8 @@
+﻿@model  FoNeke.Web.Controllers.Entreprise.ViewModels.EntrepriseViewModel
+@{
+    if ((ViewData["IsModal"] != null && (bool)ViewData["IsModal"]))
+    {
+        Layout = "../Shared/_ModalLayout.cshtml";
+    }
+}
+@Html.EditorFor(m => m.Item)

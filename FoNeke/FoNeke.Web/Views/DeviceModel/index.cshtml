@@ -1,0 +1,49 @@
+﻿@using EMM.FoNeke.Common.Extentions
+@using FoNeke.Web.Models.Devices
+@model FoNeke.Web.Controllers.DeviceModel.ViewModels.DeviceModelViewModel
+
+
+@section Scripts
+{
+    <script>
+        $("#GridDeviceModelAddBtn").GridAddLine();
+        $("#GridDeviceModelEditBtn").GridEditLine();
+        $("#GridDeviceModelDeleteBtn").GridDeleteLine();
+        SetGridOptions($("#GridDeviceModel"));
+    </script>
+} 
+
+@Html.RenderIndexGridToolbar("DeviceModel")
+
+@(Html.Kendo().Grid<DeviceModel>()
+              .Name("GridDeviceModel")
+              .Events(ev => ev.Change("onGridSelectionChanged").DataBound("onGridDatabound"))
+              .Editable(editable => editable.DisplayDeleteConfirmation(false))
+              .Columns(columns =>
+                      {
+                          //columns.Bound(p => p.Name).ClientTemplate("#=GridDisplayBaseEntity(data.Name)#").ClientGroupHeaderTemplate("#=GridDisplayBaseEntity(value)#");  
+                          columns.Bound(p => p.Display); 
+                      })
+              .Resizable(resize => resize.Columns(true))
+              .Groupable()
+              .Selectable()
+              .Editable(editable => editable.Mode(GridEditMode.PopUp))
+               .Pageable(pageable => pageable
+                                    .Refresh(true)
+                                    .ButtonCount(5))
+              .Sortable()
+              .Scrollable()
+              .Filterable()
+              .DataSource(dataSource => dataSource
+                            .Ajax()
+                            .AutoSync(true)
+                            .Batch(true)
+                            .ServerOperation(false)
+                            .PageSize(15)
+                            .Model(m => m.Id(p => p.Id))
+                            .Create(update => update.Action("Edit", "DeviceModel"))
+                            .Update(update => update.Action("Edit", "DeviceModel"))
+                            .Destroy(update => update.Action("GridDelete", "DeviceModel"))
+                            .Read(read => read.Action("GridGet","DeviceModel"))))
+
+

@@ -1,0 +1,20 @@
+﻿@model FoNeke.Web.Models.Addressing.Address
+
+@{
+    var id = ViewData.TemplateInfo.GetFullHtmlFieldId("");
+    var name = ViewData.TemplateInfo.GetFullHtmlFieldName("");
+    var value = ViewData.TemplateInfo.FormattedModelValue;
+    var entityName = ViewData.ModelMetadata.ModelType.Name;
+}
+<div class='row'>
+    <div class="col-md-4">
+        @Html.EditorFor(m=>m.AddressLine)
+    </div>
+    <div class="col-md-4">
+        @Html.EditorFor(m=>m.AddressLine2)
+    </div>
+    <div class="col-md-4">
+        @Html.EditorFor(m=>m.City,"Cartouche")
+    </div>
+</div>
+

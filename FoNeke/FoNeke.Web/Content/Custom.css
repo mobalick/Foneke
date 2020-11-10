@@ -1,0 +1,14 @@
+.form-actions-comment {
+    padding: 10px 12px 12px;
+    margin: 0;
+}
+
+.k-state-selected {
+    background-color: #6fb3e0
+}
+
+.itemdiv.dialogdiv>.body>.text {
+    border-bottom-width: 0;
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
+}

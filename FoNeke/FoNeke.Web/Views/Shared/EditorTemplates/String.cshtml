@@ -1,0 +1,26 @@
+﻿@using EMM.FoNeke.Common.Extentions
+@model object 
+
+
+
+@{
+    var fullname = ViewData.TemplateInfo.GetFullHtmlFieldName("");
+
+    var id = ViewData.TemplateInfo.GetFullHtmlFieldId("");
+    var name = fullname.Contains(ViewData.ModelMetadata.PropertyName)?fullname: $"{fullname}.{ViewData.ModelMetadata.PropertyName}";
+    var value = ViewData.TemplateInfo.FormattedModelValue;
+    var libelle = string.Format("{0}_{1}", ViewData.ModelMetadata.ContainerType.Name, ViewData.ModelMetadata.PropertyName).ToLocalized();
+}
+
+<div class='form-group'>
+    <label class='col-sm-4 control-label no-padding-right' for='@id'>@libelle&nbsp;:</label>
+    <div class='col-sm-8'>
+        @Html.TextBoxFor(m => m, new { @class = "input-validation-error col-xs-12 col-sm-12" })
+
+        @*<input class="input-validation-error col-xs-12 col-sm-12" id="@id" name="@name" type="text" value="@value">*@
+
+        <div class="red">
+            @Html.ValidationMessageFor(model => model)
+        </div>
+    </div>
+</div>

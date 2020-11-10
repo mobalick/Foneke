@@ -1,0 +1,234 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@model FoNeke.Web.Controllers.Vehicle.ViewModels.VehicleViewModel
+
+@using FoNeke.Web.Models.Actions
+
+@{
+    var dateTemplate = Html.EditorFor(m => m.DateHistory).ToHtmlString();
+}
+
+
+<div style="height:900px" id="divCarte">
+    <div id="map" style="height:150px;"></div>
+
+    <div class="span6" id="tabHistory">
+        <div class="tabbable">
+            <ul class="nav nav-tabs" id="myTab">
+                <li class="active">
+                    <a data-toggle="tab" href="#home">
+                        <i class="green icon-home bigger-110"></i>
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a data-toggle="tab" href="#profile">
+                        Messages
+                        <span class="badge badge-important">4</span>
+                    </a>
+                </li>
+
+                <li class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        Dropdown
+                        <b class="caret"></b>
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-info">
+                        <li>
+                            <a data-toggle="tab" href="#dropdown1">fat</a>
+                        </li>
+
+                        <li>
+                            <a data-toggle="tab" href="#dropdown2">fmdo</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div id="home" class="tab-pane in active">
+                    @(Html.Kendo().Grid<DevicePosition>()
+
+                          .Name("gridHistory")
+                          .ToolBar(tb =>
+                          {
+                              tb.Template(dateTemplate);
+                          })
+                          .Columns(columns =>
+                          {
+                              columns.Bound(p => p.Time).Format("{0:dd/MM/yyyy HH:mm}");
+                              columns.Bound(p => p.Address.AddressLine);
+                              columns.Bound(p => p.Speed);//.ClientTemplate("#if(Speed > 2){# Moving #}#");
+
+                          })
+                          //.Events(e => e.DataBound("gridDataBound"))
+                          .DataSource(dt => dt
+                              .Ajax()
+                              .Read(read => read.Action("GetDevicePositions", "Device", new { VehicleId = Model.Id }))
+                         
+                              .PageSize(10))
+                          .Filterable()
+                          .Pageable())
+                </div>
+
+                <div id="profile" class="tab-pane">
+                    <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.</p>
+                </div>
+
+                <div id="dropdown1" class="tab-pane">
+                    <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade.</p>
+                </div>
+
+                <div id="dropdown2" class="tab-pane">
+                    <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+        <script type="text/javascript">
+            $(function() {
+
+                $("#divCarte").height(window.innerHeight - 100);
+
+                Split(['#map', '#tabHistory'],
+                    {
+                        direction: 'vertical',
+                        cursor: 'row-resize'
+                    });
+
+
+                //Functions
+                function gridDataBound() {
+                    Console.log("DevicePositionsDataBound");
+                };
+
+                $("#gridHistory").data('kendoGrid').bind('dataBound',
+                    function(e) {
+                        console.log("gridHistoryDataBound");
+
+                        initMap(e.sender.dataSource._data);
+
+                    });
+
+
+                $("#DateHistory").bind('change', function (e) {
+                    console.log("DateHistory change");
+
+                    $("#gridHistory").data('kendoGrid').dataSource.read({ date: e.target.value});
+                });
+
+                var bindDetail = function(id, data) {
+                    console.log(id);
+                };
+
+                var onMarkerClick = function() {
+                    console.log("onMarkerClick");
+                    var that = this;
+                    if (this.getAnimation() !== null) {
+                        this.setAnimation(null);
+                    } else {
+                        this.setAnimation(google.maps.Animation.BOUNCE);
+                        setTimeout(function() { that.setAnimation(null); }, 1000)
+                    }
+                };
+
+                function getMarkerColor() {
+                    var iconURLPrefix = 'http://maps.google.com/mapfiles/ms/icons/';
+
+                    var icons = [
+                        iconURLPrefix + 'red.png',
+                        iconURLPrefix + 'green.png',
+                        iconURLPrefix + 'blue.png',
+                        iconURLPrefix + 'orange.png',
+                        iconURLPrefix + 'purple.png',
+                        iconURLPrefix + 'pink.png',
+                        iconURLPrefix + 'yellow.png'
+                    ];
+                    var iconsLength = icons.length;
+                    var random = Math.floor(Math.random() * 7);
+                    return new google.maps.MarkerImage(icons[random]);
+                };
+
+                function addMarker(p, map, bounds) {
+
+                    var infowindow = new google.maps.InfoWindow;
+
+                    var marker = new google.maps.Marker({
+                        position: p,
+                        animation: google.maps.Animation.DROP,
+                        icon: getMarkerColor(),
+                        map: map,
+                    });
+
+                    //Set text on marker
+                    infowindow.setContent(p.immat);
+                    infowindow.open(map, marker);
+
+                    //marker Events
+                    marker.addListener('click', onMarkerClick);
+
+                    //Handle zom on map https://coderwall.com/p/hojgtq/auto-center-and-auto-zoom-a-google-map
+                    var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+                    bounds.extend(loc);
+                };
+
+
+                function initMap(data) {
+                    //$.post("/Vehicle/GridGet",
+                    //    function(response) {
+                            var bounds = new google.maps.LatLngBounds();
+
+
+                            var points = data.map(x => {
+                                return {
+                                    lat: x.Latitude,
+                                    lng: x.Longitude,
+                                    immat: x.Address.AddressLine
+                                }
+                            });
+                            var centerPoint = points[0];
+                            var map = new google.maps.Map(document.getElementById('map'),
+                                {
+                                    zoom: 12,
+                                    center: centerPoint
+                                });
+
+                            points.forEach(function(p) {
+                                addMarker(p, map, bounds);
+                            });
+
+                            //Handle zom on map https://coderwall.com/p/hojgtq/auto-center-and-auto-zoom-a-google-map
+                            map.fitBounds(bounds);
+                            map.panToBounds(bounds);
+
+                        //});
+
+
+                } //End Functions
+
+
+                //Calls
+                //toggleIsSentImediat();
+                //End Calls
+
+
+                //Bind
+                //$("body").delegate("#DevicePositions", "dataBound", DevicePositionsDataBound);
+                //End Bind
+
+            });
+
+        </script>
+
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBto-QEVHk0ognTc3NKSCnhaD1FHYPOIOY">
+        </script>
+
+    }

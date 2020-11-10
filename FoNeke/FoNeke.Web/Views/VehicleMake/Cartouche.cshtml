@@ -1,0 +1,29 @@
+﻿@using FoNeke.Web.Models.Vehicles
+@model FoNeke.Web.Controllers.VehicleMake.ViewModels.VehicleMakeViewModel
+@{
+    Layout = "";
+} 
+    @(Html.Kendo().Grid<VehicleMake>()
+              .Name("GridVehicleMake")
+              .Events(ev=>ev.DataBound("onGridDatabound"))
+              .Columns(columns =>
+                      {
+                          columns.Bound(p => p.Display); 
+                      })
+              .Resizable(resize => resize.Columns(true))
+              .Groupable()
+              .Selectable()
+              .Editable(editable => editable.Mode(GridEditMode.PopUp))
+              .Pageable()
+              .Sortable()
+              .Scrollable()
+              .Filterable(filterable => filterable
+                                            .Extra(true))
+                              .DataSource(dataSource => dataSource
+                                            .Ajax()
+                                            .PageSize(15)
+                                            .Model(m => m.Id(p => p.Id))
+                                            .Create(update => update.Action("Edit", "VehicleMake"))
+                                            .Update(update => update.Action("Edit", "VehicleMake"))
+                                            .Destroy(update => update.Action("Delete", "VehicleMake"))
+                                            .Read(read => read.Action("GridGet","VehicleMake"))))

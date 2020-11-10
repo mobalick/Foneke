@@ -1,0 +1,53 @@
+﻿@using EMM.FoNeke.Common.Extentions
+@using FoNeke.Web.Models.Devices
+@model FoNeke.Web.Controllers.Device.ViewModels.DeviceViewModel
+
+
+@section Scripts
+{
+    <script>
+        $("#GridDeviceAddBtn").GridAddLine();
+        $("#GridDeviceEditBtn").GridEditLine();
+        $("#GridDeviceDeleteBtn").GridDeleteLine();
+        SetGridOptions($("#GridDevice"));
+    </script>
+} 
+
+@Html.RenderIndexGridToolbar("Device")
+
+@(Html.Kendo().Grid<Device>()
+              .Name("GridDevice")
+              .Events(ev => ev.Change("onGridSelectionChanged").DataBound("onGridDatabound"))
+              .Editable(editable => editable.DisplayDeleteConfirmation(false))
+              .Columns(columns =>
+              {
+
+                          columns.Bound(p => p.PhoneNumber);  
+                          columns.Bound(p => p.DeviceModel.DeviceMake.Display);  
+                          columns.Bound(p => p.DeviceModel.ModelName);  
+                          columns.Bound(p => p.DateOfPurchase);  
+                          columns.Bound(p => p.Display); 
+                      })
+              .Resizable(resize => resize.Columns(true))
+              .Groupable()
+              .Selectable()
+              .Editable(editable => editable.Mode(GridEditMode.PopUp))
+              .Pageable(pageable => pageable
+                                    .Refresh(true)
+                                    .ButtonCount(5))
+              .Sortable()
+              .Scrollable()
+              .Filterable()
+              .DataSource(dataSource => dataSource
+                            .Ajax()
+                            .AutoSync(true)
+                            .Batch(true)
+                            .ServerOperation(false)
+                            .PageSize(15)
+                            .Model(m => m.Id(p => p.Id))
+                            .Create(update => update.Action("Edit", "Device"))
+                            .Update(update => update.Action("Edit", "Device"))
+                            .Destroy(update => update.Action("GridDelete", "Device"))
+                            .Read(read => read.Action("GridGet","Device"))))
+
+

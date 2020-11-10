@@ -1,0 +1,27 @@
+﻿@using System.Web.UI.WebControls
+@using EMM.FoNeke.Common.Extentions
+@model Enum 
+
+
+@{
+    var id = ViewData.TemplateInfo.GetFullHtmlFieldId("");
+    var name = ViewData.TemplateInfo.GetFullHtmlFieldName("");
+    //var value = ViewData.TemplateInfo.FormattedModelValue;
+    //var source = Enum.GetNames(ViewData.ModelMetadata.ModelType).Select(s => new SelectListItem { Text = s, Value = ((int)Enum.Parse(ViewData.ModelMetadata.ModelType, s)).ToString() }).ToList();
+    var libelle = string.Format("{0}_{1}", ViewData.ModelMetadata.ContainerType.Name, ViewData.ModelMetadata.PropertyName).ToLocalized();
+    
+}
+
+@*<div class='form-group'>
+    <label class='col-sm-4 control-label no-padding-right' for='@id'>@name&nbsp;:</label>
+    <div class='col-sm-8'>
+        @Html.DropDownListFor(m => m, source, new { @class = "col-xs-12 col-sm-12" })
+    </div>
+</div>*@
+
+<div class='form-group'>
+    <label class='col-sm-4 control-label no-padding-right' for='@id'>@libelle&nbsp;:</label>
+    <div class='col-sm-8'>
+        @Html.EnumDropDownListFor(m => m,  new { @class = "form-control col-xs-12 col-sm-12" })
+     </div>
+</div>

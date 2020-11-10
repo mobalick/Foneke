@@ -1,0 +1,30 @@
+﻿@using FoNeke.Web.Models.Devices
+@model FoNeke.Web.Controllers.DeviceType.ViewModels.DeviceTypeViewModel
+@{
+    Layout = "";
+} 
+    @(Html.Kendo().Grid<DeviceType>()
+              .Name("GridDeviceType")
+              .Events(ev=>ev.DataBound("onGridDatabound"))
+              .Columns(columns =>
+                      {
+                          columns.Bound(p => p.Name).ClientTemplate("#=GridDisplayBaseEntity(data.Name)#").ClientGroupHeaderTemplate("#=GridDisplayBaseEntity(value)#");  
+                          columns.Bound(p => p.Display); 
+                      })
+              .Resizable(resize => resize.Columns(true))
+              .Groupable()
+              .Selectable()
+              .Editable(editable => editable.Mode(GridEditMode.PopUp))
+              .Pageable()
+              .Sortable()
+              .Scrollable()
+              .Filterable(filterable => filterable
+                                            .Extra(true))
+                              .DataSource(dataSource => dataSource
+                                            .Ajax()
+                                            .PageSize(15)
+                                            .Model(m => m.Id(p => p.Id))
+                                            .Create(update => update.Action("Edit", "DeviceType"))
+                                            .Update(update => update.Action("Edit", "DeviceType"))
+                                            .Destroy(update => update.Action("Delete", "DeviceType"))
+                                            .Read(read => read.Action("GridGet","DeviceType"))))

@@ -1,0 +1,9 @@
+﻿@model  FoNeke.Web.Controllers.DeviceCommand.ViewModels.DeviceCommandViewModel
+@{
+    if ((ViewData["IsModal"] != null && (bool)ViewData["IsModal"]))
+    {
+        Layout = "../Shared/_ModalLayout.cshtml";
+    }
+} 
+
+@Html.EditorFor(m=>m.Item)

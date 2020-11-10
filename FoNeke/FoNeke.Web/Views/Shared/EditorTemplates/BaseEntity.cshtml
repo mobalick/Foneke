@@ -1,0 +1,116 @@
+﻿@using System.Reflection
+@using EMM.FoNeke.Common.Attributes
+@using EMM.FoNeke.Common.Entities
+@using FoNeke.Web.Models
+@using FoNeke.Web.Models.Directory
+@using FoNeke.Web.Models.Addressing
+@model EMM.FoNeke.Common.Entities.BaseEntity
+@{
+    var count = 0;
+
+    var fields = ViewData.ModelMetadata.Properties.Where(p => !p.AdditionalValues.ContainsKey("FormIgnore")).ToList();
+
+    var isSupaAdmin = ViewData["IsSuperAdmin"] as bool?;
+
+    var IdEntreprise = ViewData["CurrentEntrepriseId"] as string;
+
+    if (Model is BaseEntityEntreriseId && ((dynamic)Model).IdEntreprise != null)
+    {
+        IdEntreprise = ((dynamic)Model).IdEntreprise;
+    }
+}
+
+<form class="form-horizontal" role="form" id="frm-edit-@ViewData.ModelMetadata.ModelType.Name" method="POST">
+    <div class="row">
+        @Html.AntiForgeryToken()
+    </div>
+    <div class="row">
+
+        @if (!string.IsNullOrEmpty(Model.Id))
+        {
+            @Html.HiddenFor(m => m.Id);
+
+        }
+
+        @if (isSupaAdmin.HasValue && isSupaAdmin.Value && IdEntreprise != null && Model is BaseEntityEntreriseId )
+        {
+            <div class="col-md-4">
+                    @Html.EditorFor(m => ((BaseEntityEntreriseId)m).Entreprise, "Cartouche", new { PropertyName = "Entreprise" })
+            </div>
+        }
+        else
+        {
+            if (IdEntreprise != null)
+            {
+                <input type="hidden" name="Item.IdEntreprise" value="@IdEntreprise" />
+            }
+        }
+
+
+        @if (!fields.Any())
+        {
+            <div class="col-md-4">
+                @Html.Editor("Name", "String")
+            </div>
+        }
+        else
+        {
+            foreach (var field in fields)
+            {
+                count++;
+
+                if (field.ModelType == typeof(Address))
+                {
+                    count = 0;
+                @:</div><div class='row'>
+                    @:<h4 class="header smaller lighter blue">
+                        @field.PropertyName
+                    @:</h4>
+
+
+
+
+                    @Html.Editor(field.PropertyName, "Address")
+                    @:<div class="hr hr-18 hr-double dotted"></div>
+                @:</div><div class='row'>
+
+
+
+
+                }
+                else
+                {
+                    <div class="col-md-4">
+                        @Html.Editor(field.PropertyName, CitUI.GetFieldTemplateName(field))
+                        <div class="red">
+                            @Html.ValidationMessageFor(model => model)
+                        </div>
+                    </div>
+                    if (count >= 3)
+                    {
+                        count = 0;
+                    @:</div><div class='row'>
+                    }
+                }
+            }
+        }
+    </div>
+
+    @if (ViewData["IsModal"] == null || !(bool)ViewData["IsModal"])
+    {
+        <div class="clearfix form-actions">
+            <div class="col-md-offset-3 col-md-9">
+                <button class="btn btn-info" type="submit">
+                    <i class="icon-ok bigger-110"></i>
+                    Submit
+                </button>
+
+                &nbsp; &nbsp; &nbsp;
+                <button class="btn" type="reset">
+                    <i class="icon-undo bigger-110"></i>
+                    Reset
+                </button>
+            </div>
+        </div>
+    }
+</form>

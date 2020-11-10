@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mvcSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
+            xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
+
+
+  <mvcSiteMapNode title="$resources:Strings, Title_Home" controller="Home" imageUrl="menu-icon fa fa-home" action="Index">
+
+
+    <!--<mvcSiteMapNode title="Notifications" imageUrl="menu-icon fa fa-bell icon-animated-bell" controller="Notification"  clickable="false" key="Notification" >
+      <mvcSiteMapNode title="List" controller="Notification" imageUrl="menu-icon fa fa-eye" action="Index" key="Notification_Index" />
+      <mvcSiteMapNode title="Create" controller="Notification" imageUrl="menu-icon fa fa-plus" action="Edit" key="Notification_Edit" />
+    </mvcSiteMapNode>-->
+
+    <!--<mvcSiteMapNode title="SMS" imageUrl="menu-icon fa fa-envelope" controller="Home"  clickable="false" key="Home" >
+      <mvcSiteMapNode title="SendSMS" controller="Home" imageUrl="menu-icon fa fa-plus" action="SendSMS" key="Home_SendSMS" />
+      <mvcSiteMapNode title="ReadSMS" controller="Home" imageUrl="menu-icon fa fa-eye " action="ReadSMS" key="Home_ReadSMS" />
+    </mvcSiteMapNode>-->
+
+    <mvcSiteMapNode title="$resources:Strings, Title_Admin"  resourceKey="Admin" imageUrl="menu-icon fa fa-key" controller="Home" roles="SuperAdmin,AdminSoc"  clickable="false" key="Admin" >
+      <mvcSiteMapNode title="Entreprises" imageUrl="menu-icon fa fa-building" controller="Home"  clickable="false" key="Entreprises" >
+        <mvcSiteMapNode title="List Entreprises" controller="Entreprise" imageUrl="menu-icon fa fa-eye " action="Index" key="Entreprises_Index" />
+        <mvcSiteMapNode title="Create Entreprises" controller="Entreprise" imageUrl="menu-icon fa fa-plus" action="Create" key="Entreprises_Create" />
+      </mvcSiteMapNode>
+      
+      <mvcSiteMapNode title="Users" imageUrl="menu-icon fa fa-building" controller="User"  clickable="false" key="Users" >
+        <mvcSiteMapNode title="List Users" controller="User" imageUrl="menu-icon fa fa-eye " action="Index" key="Users_Index" />
+        <mvcSiteMapNode title="Create Users" controller="User" imageUrl="menu-icon fa fa-plus" action="Create" key="Users_Create" />
+      </mvcSiteMapNode>
+      
+      <mvcSiteMapNode title="Drivers" imageUrl="menu-icon fa fa-envelope" controller="Home"  clickable="false" key="Drivers" >
+        <mvcSiteMapNode title="List Drivers" controller="Driver" imageUrl="menu-icon fa fa-eye " action="Index" key="Drivers_Index" />
+        <mvcSiteMapNode title="Create Driver" controller="Driver" imageUrl="menu-icon fa fa-plus" action="Create" key="Drivers_Create" />
+      </mvcSiteMapNode>
+      
+      <mvcSiteMapNode title="Vehicles" imageUrl="menu-icon fa fa-envelope" controller="Home"  clickable="false" key="Vehicles" >
+        <mvcSiteMapNode title="List Vehicles" controller="Vehicle" imageUrl="menu-icon fa fa-eye " action="Index" key="Vehicles_Index" />
+        <mvcSiteMapNode title="Create Vehicle" controller="Vehicle" imageUrl="menu-icon fa fa-plus" action="Create" key="Vehicles_Create" />
+        <mvcSiteMapNode title="VehicleModels" imageUrl="menu-icon fa fa-envelope" controller="Home"  clickable="false" key="VehicleModels" >
+          <mvcSiteMapNode title="List VehicleModels" controller="VehicleModel" imageUrl="menu-icon fa fa-eye " action="Index" key="VehicleModels_Index" />
+          <mvcSiteMapNode title="Create VehicleModel" controller="VehicleModel" imageUrl="menu-icon fa fa-plus" action="Create" key="VehicleModels_Create" />
+        </mvcSiteMapNode>
+        <mvcSiteMapNode title="VehicleMakes" imageUrl="menu-icon fa fa-envelope" controller="Home"  clickable="false" key="VehicleMakes" >
+          <mvcSiteMapNode title="List VehicleMakes" controller="VehicleMake" imageUrl="menu-icon fa fa-eye " action="Index" key="VehicleMakes_Index" />
+          <mvcSiteMapNode title="Create VehicleMake" controller="VehicleMake" imageUrl="menu-icon fa fa-plus" action="Create" key="VehicleMakes_Create" />
+        </mvcSiteMapNode>
+        <mvcSiteMapNode title="Assurances" imageUrl="menu-icon fa fa-envelope" controller="Home"  clickable="false" key="Assurances" >
+          <mvcSiteMapNode title="List Assurances" controller="Assurance" imageUrl="menu-icon fa fa-eye " action="Index" key="Assurances_Index" />
+          <mvcSiteMapNode title="Create Assurance" controller="Assurance" imageUrl="menu-icon fa fa-plus" action="Create" key="Assurances_Create" />
+        </mvcSiteMapNode>
+      </mvcSiteMapNode>
+      <mvcSiteMapNode title="Devices" imageUrl="menu-icon fa fa-envelope" controller="Home"  clickable="false" key="Devices" >
+        <mvcSiteMapNode title="List Devices" controller="Device" imageUrl="menu-icon fa fa-eye " action="Index" key="Devices_Index" />
+        <mvcSiteMapNode title="Create Device" controller="Device" imageUrl="menu-icon fa fa-plus" action="Create" key="Devices_Create" />
+        <mvcSiteMapNode title="DeviceMakes" imageUrl="menu-icon fa fa-envelope" controller="Home"  clickable="false" key="DeviceMakes" >
+          <mvcSiteMapNode title="List DeviceMakes" controller="DeviceMake" imageUrl="menu-icon fa fa-eye " action="Index" key="DeviceMakes_Index" />
+          <mvcSiteMapNode title="Create DeviceMakes" controller="DeviceMake" imageUrl="menu-icon fa fa-plus" action="Create" key="DeviceMakes_Create" />
+        </mvcSiteMapNode>
+        <mvcSiteMapNode title="DeviceModels" imageUrl="menu-icon fa fa-envelope" controller="Home"  clickable="false" key="DeviceModels" >
+          <mvcSiteMapNode title="List DeviceModels" controller="DeviceModel" imageUrl="menu-icon fa fa-eye " action="Index" key="DeviceModels_Index" />
+          <mvcSiteMapNode title="Create DeviceModels" controller="DeviceModel" imageUrl="menu-icon fa fa-plus" action="Create" key="DeviceModels_Create" />
+        </mvcSiteMapNode>
+        <mvcSiteMapNode title="DeviceCommands" imageUrl="menu-icon fa fa-envelope" controller="Home"  clickable="false" key="DeviceCommands" >
+          <mvcSiteMapNode title="List DeviceCommands" controller="DeviceCommand" imageUrl="menu-icon fa fa-eye " action="Index" key="DeviceCommands_Index" />
+          <mvcSiteMapNode title="Create DeviceCommands" controller="DeviceCommand" imageUrl="menu-icon fa fa-plus" action="Create" key="DeviceCommands_Create" />
+        </mvcSiteMapNode>
+
+        <mvcSiteMapNode title="DeviceType" imageUrl="menu-icon fa fa-envelope" controller="Home"  clickable="false" key="DeviceType" >
+          <mvcSiteMapNode title="List DeviceType" controller="DeviceType" imageUrl="menu-icon fa fa-eye " action="Index" key="DeviceType_Index" />
+          <mvcSiteMapNode title="Create DeviceType" controller="DeviceType" imageUrl="menu-icon fa fa-plus" action="Create" key="DeviceType_Create" />
+        </mvcSiteMapNode>
+      </mvcSiteMapNode>
+    </mvcSiteMapNode>
+
+    <mvcSiteMapNode title="$resources:Strings, Title_Account" controller="Account" imageUrl="menu-icon fa fa-users" key="Account"  clickable="false" >
+      <mvcSiteMapNode title="$resources:Strings, Titile_Manage" controller="Account" imageUrl="menu-icon fa fa-cog" action="Manage" key="Account_Manage">
+      </mvcSiteMapNode>
+    </mvcSiteMapNode>
+
+  </mvcSiteMapNode>
+
+</mvcSiteMap>

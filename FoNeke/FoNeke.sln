@@ -1,0 +1,135 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2020
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoNeke.Web", "FoNeke.Web\FoNeke.Web.csproj", "{A3314060-E112-49CE-93CE-E14379EC9596}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMM.FoNeke.Common", "EMM.FoNeke.Common\EMM.FoNeke.Common.csproj", "{AF5F2EFA-B602-4D5B-A721-004DFD95D21E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Arch", "Arch", "{1B26DE8E-14BD-4DD6-8846-29CA0942DF3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoNeke.Services", "FoNeke.Services\FoNeke.Services.csproj", "{24DBB45D-229B-4319-87DF-04F60A030FA1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoNeke.Web.Repositories", "FoNeke.Web.Repositories\FoNeke.Web.Repositories.csproj", "{5F4A15C8-B5C4-4608-9256-0FA639298530}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoNeke.Web.Models", "FoNeke.Web.Models\FoNeke.Web.Models.csproj", "{F2F50DAC-B7F3-42F3-8C81-993EFED8AF4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoNeke.Web.Controllers", "FoNeke.Web.Controllers\FoNeke.Web.Controllers.csproj", "{F8FDE154-D483-4352-B03B-411199BB3B4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoNeke.Tests", "FoNeke.Tests\FoNeke.Tests.csproj", "{CC856A5A-D451-4077-8B47-D643882F077C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foneke.Windows.SmsServer", "Foneke.Windows.Service\Foneke.Windows.SmsServer.csproj", "{574E491B-E92C-4547-ADF5-FD44FF37E668}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoNeke.WebSocketServer", "FoNeke.WebSocketServer\FoNeke.WebSocketServer.csproj", "{32EF13E1-EBC5-47C8-8A41-C2D759A6CEF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoNeke.Windows.ServiceHost", "FoNeke.Windows.ServiceHost\FoNeke.Windows.ServiceHost.csproj", "{1CC9BB60-1D4A-46B9-AE6C-6639F8EB0CFA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Config", "Config", "{A1248AD0-4CCE-4CD3-A1C8-CDE1DC11D62C}"
+	ProjectSection(SolutionItems) = preProject
+		FoNeke.Web\appSettings.config = FoNeke.Web\appSettings.config
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foneke.Resources", "Foneke.Resources\Foneke.Resources.csproj", "{E55BDB36-4DA0-4192-B6B7-04301E9C095F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A3314060-E112-49CE-93CE-E14379EC9596}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3314060-E112-49CE-93CE-E14379EC9596}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3314060-E112-49CE-93CE-E14379EC9596}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3314060-E112-49CE-93CE-E14379EC9596}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF5F2EFA-B602-4D5B-A721-004DFD95D21E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF5F2EFA-B602-4D5B-A721-004DFD95D21E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF5F2EFA-B602-4D5B-A721-004DFD95D21E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF5F2EFA-B602-4D5B-A721-004DFD95D21E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24DBB45D-229B-4319-87DF-04F60A030FA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24DBB45D-229B-4319-87DF-04F60A030FA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24DBB45D-229B-4319-87DF-04F60A030FA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24DBB45D-229B-4319-87DF-04F60A030FA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F4A15C8-B5C4-4608-9256-0FA639298530}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F4A15C8-B5C4-4608-9256-0FA639298530}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F4A15C8-B5C4-4608-9256-0FA639298530}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F4A15C8-B5C4-4608-9256-0FA639298530}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2F50DAC-B7F3-42F3-8C81-993EFED8AF4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2F50DAC-B7F3-42F3-8C81-993EFED8AF4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2F50DAC-B7F3-42F3-8C81-993EFED8AF4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2F50DAC-B7F3-42F3-8C81-993EFED8AF4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8FDE154-D483-4352-B03B-411199BB3B4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8FDE154-D483-4352-B03B-411199BB3B4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8FDE154-D483-4352-B03B-411199BB3B4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8FDE154-D483-4352-B03B-411199BB3B4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC856A5A-D451-4077-8B47-D643882F077C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC856A5A-D451-4077-8B47-D643882F077C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC856A5A-D451-4077-8B47-D643882F077C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC856A5A-D451-4077-8B47-D643882F077C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{574E491B-E92C-4547-ADF5-FD44FF37E668}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{574E491B-E92C-4547-ADF5-FD44FF37E668}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{574E491B-E92C-4547-ADF5-FD44FF37E668}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{574E491B-E92C-4547-ADF5-FD44FF37E668}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32EF13E1-EBC5-47C8-8A41-C2D759A6CEF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32EF13E1-EBC5-47C8-8A41-C2D759A6CEF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32EF13E1-EBC5-47C8-8A41-C2D759A6CEF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32EF13E1-EBC5-47C8-8A41-C2D759A6CEF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CC9BB60-1D4A-46B9-AE6C-6639F8EB0CFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CC9BB60-1D4A-46B9-AE6C-6639F8EB0CFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CC9BB60-1D4A-46B9-AE6C-6639F8EB0CFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CC9BB60-1D4A-46B9-AE6C-6639F8EB0CFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E55BDB36-4DA0-4192-B6B7-04301E9C095F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E55BDB36-4DA0-4192-B6B7-04301E9C095F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E55BDB36-4DA0-4192-B6B7-04301E9C095F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E55BDB36-4DA0-4192-B6B7-04301E9C095F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AF5F2EFA-B602-4D5B-A721-004DFD95D21E} = {1B26DE8E-14BD-4DD6-8846-29CA0942DF3D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4B871DCA-3794-4D48-B0FE-C46DCD687E13}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 12
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://constructive-it.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = EMM.FoNeke.Common\\EMM.FoNeke.Common.csproj
+		SccProjectTopLevelParentUniqueName1 = FoNeke.sln
+		SccProjectName1 = EMM.FoNeke.Common
+		SccLocalPath1 = EMM.FoNeke.Common
+		SccProjectUniqueName2 = FoNeke.Services\\FoNeke.Services.csproj
+		SccProjectName2 = FoNeke.Services
+		SccLocalPath2 = FoNeke.Services
+		SccProjectUniqueName3 = FoNeke.Web.Controllers\\FoNeke.Web.Controllers.csproj
+		SccProjectName3 = FoNeke.Web.Controllers
+		SccLocalPath3 = FoNeke.Web.Controllers
+		SccProjectUniqueName4 = FoNeke.Web.Models\\FoNeke.Web.Models.csproj
+		SccProjectName4 = FoNeke.Web.Models
+		SccLocalPath4 = FoNeke.Web.Models
+		SccProjectUniqueName5 = FoNeke.Web.Repositories\\FoNeke.Web.Repositories.csproj
+		SccProjectName5 = FoNeke.Web.Repositories
+		SccLocalPath5 = FoNeke.Web.Repositories
+		SccProjectUniqueName6 = FoNeke.Web\\FoNeke.Web.csproj
+		SccProjectName6 = FoNeke.Web
+		SccLocalPath6 = FoNeke.Web
+		SccProjectUniqueName7 = FoNeke.Tests\\FoNeke.Tests.csproj
+		SccProjectName7 = FoNeke.Tests
+		SccLocalPath7 = FoNeke.Tests
+		SccProjectUniqueName8 = FoNeke.WebSocketServer\\FoNeke.WebSocketServer.csproj
+		SccProjectName8 = FoNeke.WebSocketServer
+		SccLocalPath8 = FoNeke.WebSocketServer
+		SccProjectUniqueName9 = FoNeke.Windows.ServiceHost\\FoNeke.Windows.ServiceHost.csproj
+		SccProjectName9 = FoNeke.Windows.ServiceHost
+		SccLocalPath9 = FoNeke.Windows.ServiceHost
+		SccProjectUniqueName10 = Foneke.Windows.Service\\Foneke.Windows.SmsServer.csproj
+		SccProjectName10 = Foneke.Windows.Service
+		SccLocalPath10 = Foneke.Windows.Service
+		SccProjectUniqueName11 = Foneke.Resources\\Foneke.Resources.csproj
+		SccProjectName11 = Foneke.Resources
+		SccLocalPath11 = Foneke.Resources
+	EndGlobalSection
+EndGlobal

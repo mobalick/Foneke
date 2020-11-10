@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@model List<FoNeke.Web.Models.Dto.Sms>
+
+
+@(Html.Kendo().Grid(Model)
+      .Name("SMSs")
+      .Columns(columns =>
+      {
+          columns.Bound(p => p.Date);
+          columns.Bound(p => p.From);
+          columns.Bound(p => p.Text);
+      })
+      .DataSource(dt=>dt.Custom().PageSize(15))
+      .Pageable())

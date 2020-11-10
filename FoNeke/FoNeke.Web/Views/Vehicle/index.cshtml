@@ -1,0 +1,55 @@
+﻿
+@using EMM.FoNeke.Common.Extentions
+@using FoNeke.Web.Controllers.Vehicle.ViewModels
+@using FoNeke.Web.Models.Vehicles
+@model FoNeke.Web.Controllers.Vehicle.ViewModels.VehicleViewModel
+
+
+@section Scripts
+{
+    <script>
+        $("#GridVehicleAddBtn").GridAddLine();
+        $("#GridVehicleEditBtn").GridEditLine();
+        $("#GridVehicleDeleteBtn").GridDeleteLine();
+        SetGridOptions($("#GridVehicle"));
+    </script>
+} 
+
+@Html.RenderIndexGridToolbar("Vehicle")
+
+@(Html.Kendo().Grid<VehicleViewModel>()
+              .Name("GridVehicle")
+              .Events(ev => ev.Change("onGridSelectionChanged").DataBound("onGridDatabound"))
+              .Editable(editable => editable.DisplayDeleteConfirmation(false))
+              .Columns(columns =>
+              {
+                  //columns.Bound(p => p.Item.Name).ClientTemplate("#=GridDisplayBaseEntity(data.Name)#").ClientGroupHeaderTemplate("#=GridDisplayBaseEntity(value)#");
+                  columns.Bound(p => p.Item.CarModel.Display);
+                  columns.Bound(p => p.Item.SerialNumber);
+                  columns.Bound(p => p.Item.LicencePlate);
+                  columns.Bound(p => p.Item.Display);
+                  columns.Bound(p => p.Item.Device.PhoneNumber);
+              })
+              .Resizable(resize => resize.Columns(true))
+              .Groupable()
+              .Selectable()
+              .Editable(editable => editable.Mode(GridEditMode.PopUp))
+               .Pageable(pageable => pageable
+                                    .Refresh(true)
+                                    .ButtonCount(5))
+              .Sortable()
+              .Scrollable()
+              .Filterable()
+              .DataSource(dataSource => dataSource
+                            .Ajax()
+                            .AutoSync(true)
+                            .Batch(true)
+                            .ServerOperation(false)
+                            .PageSize(15)
+                            .Model(m => m.Id(p => p.Id))
+                            .Create(update => update.Action("Edit", "Vehicle"))
+                            .Update(update => update.Action("Edit", "Vehicle"))
+                            .Destroy(update => update.Action("GridDelete", "Vehicle"))
+                            .Read(read => read.Action("GridGet","Vehicle"))))
+
+

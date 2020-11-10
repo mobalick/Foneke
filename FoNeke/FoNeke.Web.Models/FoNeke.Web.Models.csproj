@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F2F50DAC-B7F3-42F3-8C81-993EFED8AF4F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FoNeke.Web.Models</RootNamespace>
+    <AssemblyName>FoNeke.Web.Models</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MongoDB.Bson, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Bson.2.5.0\lib\net45\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Actions\PersonHasVehicle.cs" />
+    <Compile Include="Addressing\Address.cs" />
+    <Compile Include="Addressing\City.cs" />
+    <Compile Include="Addressing\Commune.cs" />
+    <Compile Include="Addressing\Continent.cs" />
+    <Compile Include="Addressing\Country.cs" />
+    <Compile Include="Addressing\Departement.cs" />
+    <Compile Include="Addressing\GeoPlace.cs" />
+    <Compile Include="Addressing\Location.cs" />
+    <Compile Include="Addressing\Region.cs" />
+    <Compile Include="BaseEntityEntreriseId.cs" />
+    <Compile Include="Directory\Driver.cs" />
+    <Compile Include="Directory\Entreprise.cs" />
+    <Compile Include="Directory\User.cs" />
+    <Compile Include="Dto\Messages\BaseMessage.cs" />
+    <Compile Include="Dto\Messages\ReceivedSmsMessage.cs" />
+    <Compile Include="Dto\Messages\SendSmsMessage.cs" />
+    <Compile Include="Dto\Sms.cs" />
+    <Compile Include="Dto\SmsModel.cs" />
+    <Compile Include="Dto\WebSocketMessage.cs" />
+    <Compile Include="Enums\TypeCommandEnum.cs" />
+    <Compile Include="Vehicles\Assurance.cs" />
+    <Compile Include="Vehicles\VehicleMake.cs" />
+    <Compile Include="Vehicles\VehicleModel.cs" />
+    <Compile Include="Vehicles\Gaz.cs" />
+    <Compile Include="Vehicles\Vehicle.cs" />
+    <Compile Include="Directory\Civility.cs" />
+    <Compile Include="Devices\Device.cs" />
+    <Compile Include="Devices\DeviceCommand.cs" />
+    <Compile Include="Devices\DeviceLocation.cs" />
+    <Compile Include="Devices\DeviceMake.cs" />
+    <Compile Include="Devices\DeviceModel.cs" />
+    <Compile Include="Devices\DeviceType.cs" />
+    <Compile Include="Enums\CivilityEnum.cs" />
+    <Compile Include="Enums\GenderEnum.cs" />
+    <Compile Include="Enums\SideEnum.cs" />
+    <Compile Include="Enums\TypeStreetEnum.cs" />
+    <Compile Include="Notification.cs" />
+    <Compile Include="Actions\DevicePosition.cs" />
+    <Compile Include="Directory\Person.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EMM.FoNeke.Common\EMM.FoNeke.Common.csproj">
+      <Project>{af5f2efa-b602-4d5b-a721-004dfd95d21e}</Project>
+      <Name>EMM.FoNeke.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

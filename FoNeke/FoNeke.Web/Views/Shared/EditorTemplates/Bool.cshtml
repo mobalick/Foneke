@@ -1,0 +1,29 @@
+﻿@using EMM.FoNeke.Common.Extentions
+@model bool 
+
+
+
+@{
+    var id = ViewData.TemplateInfo.GetFullHtmlFieldId("");
+    var name = ViewData.TemplateInfo.GetFullHtmlFieldName("");
+    var value = ViewData.TemplateInfo.FormattedModelValue;
+    var libelle = string.Format("{0}_{1}", ViewData.ModelMetadata.ContainerType.Name, ViewData.ModelMetadata.PropertyName).ToLocalized();
+
+}
+
+<div class='form-group'>
+    <label class='col-sm-4 control-label no-padding-right' for='@id'>@libelle&nbsp;:</label>
+    <div class='col-sm-8'>
+       
+        <label>
+            @Html.Raw(Html.CheckBoxFor(m=>m,new {@class="ace",@style="z-index: 9;"}).ToHtmlString().Replace("><","><span class='lbl'></span><"))
+        </label>
+         <div class="red"> 
+            @Html.ValidationMessageFor(model => model)
+        </div>
+     @*   <label>
+            <input name="switch-field-1" class="ace ace-switch ace-switch-7" id="toto" type="checkbox" />
+            <span class="lbl"></span>
+        </label>*@
+    </div>
+</div>

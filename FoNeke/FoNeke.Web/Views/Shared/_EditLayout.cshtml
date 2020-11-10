@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "_EditLayout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<script src="~/Scripts/Controls/CustomValidator.js"></script>
+
+<form method="POST">
+    <div class="form-horizontal">
+        <input type="hidden" name="Item.Id" value="@Model.Item.Id" />
+
+        @RenderBody()
+
+                <div class="clearfix form-actions">
+            <div class="col-md-offset-3 col-md-9">
+                <button class="btn btn-info" type="submit">
+                    <i class="ace-icon fa fa-check bigger-110"></i>
+                    Submit
+                </button>
+
+                &nbsp; &nbsp; &nbsp;
+                <button class="btn" type="reset">
+                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                    Reset
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts
+{
+       <!-- JS Controls -->
+<script src="~/Scripts/Controls/Cartouche.js"></script>
+<script src="~/Scripts/Controls/DatePicker.js"></script>
+@RenderSection("Scripts", false)
+}

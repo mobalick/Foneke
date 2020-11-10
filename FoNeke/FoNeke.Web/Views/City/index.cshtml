@@ -1,0 +1,49 @@
+﻿@using EMM.FoNeke.Common.Extentions
+@using FoNeke.Web.Models.Addressing
+@model FoNeke.Web.Controllers.City.ViewModels.CityViewModel
+
+
+@section Scripts
+{
+    <script>
+        $("#GridCityAddBtn").GridAddLine();
+        $("#GridCityEditBtn").GridEditLine();
+        $("#GridCityDeleteBtn").GridDeleteLine();
+        SetGridOptions($("#GridCity"));
+    </script>
+} 
+
+@Html.RenderIndexGridToolbar("City")
+
+@(Html.Kendo().Grid<City>()
+              .Name("GridCity")
+              .Events(ev => ev.Change("onGridSelectionChanged").DataBound("onGridDatabound"))
+              .Editable(editable => editable.DisplayDeleteConfirmation(false))
+              .Columns(columns =>
+                      {
+                          //columns.Bound(p => p.Name).ClientTemplate("#=GridDisplayBaseEntity(data.Name)#").ClientGroupHeaderTemplate("#=GridDisplayBaseEntity(value)#");  
+                          columns.Bound(p => p.Display); 
+                      })
+              .Resizable(resize => resize.Columns(true))
+              .Groupable()
+              .Selectable()
+              .Editable(editable => editable.Mode(GridEditMode.PopUp))
+               .Pageable(pageable => pageable
+                                    .Refresh(true)
+                                    .ButtonCount(5))
+              .Sortable()
+              .Scrollable()
+              .Filterable()
+              .DataSource(dataSource => dataSource
+                            .Ajax()
+                            .AutoSync(true)
+                            .Batch(true)
+                            .ServerOperation(false)
+                            .PageSize(15)
+                            .Model(m => m.Id(p => p.Id))
+                            .Create(update => update.Action("Edit", "City"))
+                            .Update(update => update.Action("Edit", "City"))
+                            .Destroy(update => update.Action("GridDelete", "City"))
+                            .Read(read => read.Action("GridGet","City"))))
+
+

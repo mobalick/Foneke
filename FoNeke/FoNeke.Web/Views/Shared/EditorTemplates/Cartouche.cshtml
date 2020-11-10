@@ -1,0 +1,46 @@
+﻿@using System.Globalization
+@using EMM.FoNeke.Common.Extentions
+@model EMM.FoNeke.Common.Entities.BaseEntity
+@{
+    var id = ViewData.TemplateInfo.GetFullHtmlFieldId("");
+    var name = ViewData["PropertyName"] ?? ViewData.TemplateInfo.GetFullHtmlFieldName("");
+    var value = ViewData.TemplateInfo.FormattedModelValue;
+    var entityName = ViewData["PropertyName"] ?? ViewData.ModelMetadata.ModelType.Name;
+    var libelle = string.Format("{0}_{1}", ViewData.ModelMetadata.ContainerType.Name, ViewData.ModelMetadata.PropertyName).ToLocalized();
+
+}
+@*<div class='form-group'>
+    <label for='@id' class='col-sm-4 control-label no-padding-right'>@name&nbsp;:</label>
+    <div class='col-sm-8 input-group input-group-sm'>
+        @Html.TextBoxFor(m=>m.Display,new {@class="col-xs-12 col-sm-12 cartouche-field",@data_cartouche_entity=entityName,@data_cartouche_id=id})
+        @Html.HiddenFor(m=>m.Id)
+
+      
+        <a href="#" class='input-group-addon cartouche-search' data-cartouche-id="@id"  data-cartouche-entity="@entityName">
+            <i class='icon-search bigger-110' data-cartouche-id="@id" data-cartouche-entity="@entityName" ></i>
+        </a>
+        
+    </div>
+    <div class='col-sm-4 control-label no-padding-right'></div>
+    <div class="red col-sm-8 input-group input-group-sm"> 
+        @Html.ValidationMessageFor(m => m.Display)
+    </div>
+</div>*@
+
+
+<div class="form-group">
+    <label for="@id" class="col-sm-4 control-label no-padding-right">@libelle&nbsp;:</label>
+    <div class="col-sm-8">
+        <div class="input-group">
+            @(Html.HiddenFor(m => m.Id, new {  @data_cartouche_entity = entityName, @data_cartouche_id = id }))
+            @(Html.TextBoxFor(m => m.Display, new { @class = "col-xs-12 col-sm-12 form-control cartouche-field", @data_cartouche_entity = entityName, @data_cartouche_id = id }))
+            <a href="#" class="input-group-addon cartouche-search" data-cartouche-id="@id" data-cartouche-entity="@entityName">
+                <i class="ace-icon fa fa-search bigger-110" data-cartouche-id="@id" data-cartouche-entity="@entityName"></i>
+            </a>
+        </div>
+    </div>
+    <div class='col-sm-4 control-label no-padding-right'></div>
+    <div class="red col-sm-8">
+        @(Html.ValidationMessageFor(m => m))
+    </div>
+</div>

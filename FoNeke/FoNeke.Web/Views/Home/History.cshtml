@@ -1,0 +1,189 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@using FoNeke.Web.Models.Actions
+@using FoNeke.Web.Controllers.Vehicle.ViewModels
+
+@model string
+
+
+<div style="height:900px" id="divCarte">
+    <div id="map" style="height:150px;"></div>
+
+
+    @(Html.Kendo().Grid<VehicleViewModel>()
+                          .Name("DevicePositions")
+                          .Columns(columns =>
+                          {
+
+                              columns.Bound(p => p.Item.LicencePlate).HeaderTemplate("<input type='checkbox' style='margin-left=-5px'/>").ClientTemplate("<a href='Vehicle/Edit/#=data.Item.Id#'>#=data.Item.LicencePlate#</a>");
+                              columns.Bound(p => p.Item.CarModel.CarMake.Make);
+                              columns.Bound(p => p.Item.CarModel.ModelName);
+                              columns.Bound(p => p.LastPosition.Address.AddressLine);
+
+                  //TODO Derniere position connue et status
+                  //TODO add button geolocalize now (activer ou pas en fonction d'un compteur)
+                  //columns.Bound(p => p.Time).Format("{0:dd/MM/yyyy HH:mm}");
+                  //columns.Bound(p => p.Speed);
+                  //columns.Bound(p => p.Longitude);
+                  //columns.Bound(p => p.Latitude);
+                  //columns.(c => c.Custom("Visualiser").Action("Edit","Vehicle", new{Id = "#=data.Item.Id#" }));
+              })
+                          .ClientDetailTemplateId("template")
+                          .DataSource(dt => dt
+                          .Ajax()
+                          //.Events(ev => ev.Change("onGridDevicePositionsChange"))
+                          .Read(read => read.Action("GridGet", "Vehicle"))
+                          .PageSize(10))
+                          .Filterable()
+                          .Selectable()
+                          .Scrollable()
+                          .Pageable())
+
+    <script id="template" type="text/kendo-tmpl">
+
+        @(Html.Kendo().Grid<DevicePosition>()
+                                  .Name("grid_#=Id#")
+                                  .Columns(columns =>
+                                  {
+                                      columns.Bound(p => p.Time).Format("{0:dddd - MM - yyyy HH:mm}");
+                                      columns.Bound(p => p.Address.AddressLine);
+                                      columns.Bound(p => p.Speed);//.ClientTemplate("#if(Speed > 2){# Moving #}#");
+
+                          })
+                                  .DataSource(dt => dt
+                                  .Ajax()
+                                  .Read(read => read.Action("GetDevicePositions", "Device", new { VehicleId = "#=Id#" }))
+
+                                  .PageSize(10))
+                                  .Filterable()
+                                  .Pageable()
+                                  .ToClientTemplate())
+    </script>
+</div>
+
+
+@section Scripts
+        {
+
+    <script type="text/javascript">
+       
+
+        $("#divCarte").height(window.innerHeight - 100);
+
+        Split(['#map', '#DevicePositions'], {
+            direction: 'vertical',
+            cursor: 'row-resize'
+        })
+
+
+        //Functions
+        var DevicePositionsDataBound = function () {
+            Console.log("DevicePositionsDataBound");
+        };
+
+
+        var bindDetail = function (id, data) {
+            console.log(id);
+        };
+
+        var onMarkerClick = function () {
+            console.log("onMarkerClick");
+            var that = this;
+            if (this.getAnimation() !== null) {
+                this.setAnimation(null);
+            } else {
+                this.setAnimation(google.maps.Animation.BOUNCE);
+                setTimeout(function () { that.setAnimation(null); }, 1000)
+            }
+        };
+
+        var getMarkerColor = function () {
+            var iconURLPrefix = 'http://maps.google.com/mapfiles/ms/icons/';
+
+            var icons = [
+                iconURLPrefix + 'red.png',
+                iconURLPrefix + 'green.png',
+                iconURLPrefix + 'blue.png',
+                iconURLPrefix + 'orange.png',
+                iconURLPrefix + 'purple.png',
+                iconURLPrefix + 'pink.png',
+                iconURLPrefix + 'yellow.png'
+            ];
+            var iconsLength = icons.length;
+            var random = Math.floor(Math.random() * 7);
+            return new google.maps.MarkerImage(icons[random]);
+        };
+
+        var addMarker = function (p, map, bounds) {
+
+            var infowindow = new google.maps.InfoWindow;
+
+            var marker = new google.maps.Marker({
+                position: p,
+                animation: google.maps.Animation.DROP,
+                icon: getMarkerColor(),
+                map: map,
+            });
+
+            //Set text on marker
+            infowindow.setContent(p.immat);
+            infowindow.open(map, marker);
+
+            //marker Events
+            marker.addListener('click', onMarkerClick);
+
+            //Handle zom on map https://coderwall.com/p/hojgtq/auto-center-and-auto-zoom-a-google-map
+            var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+            bounds.extend(loc);
+        };
+
+
+
+
+        function initMap() {
+            $.post("/Vehicle/GridGet", function (response) {
+                var bounds = new google.maps.LatLngBounds();
+
+
+                var points = response.Data.map(x => { return { lat: x.LastPosition.Latitude, lng: x.LastPosition.Longitude, immat: x.Item.LicencePlate } });
+                var uluru = points[0];
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 12,
+                    center: uluru
+                });
+
+                points.forEach(function (p) {
+                    addMarker(p, map, bounds);
+                });
+
+                //Handle zom on map https://coderwall.com/p/hojgtq/auto-center-and-auto-zoom-a-google-map
+                map.fitBounds(bounds);
+                map.panToBounds(bounds);
+
+            });
+
+
+        }        //End Functions
+
+
+        //Calls
+        //toggleIsSentImediat();
+        //End Calls
+
+
+        //Bind
+        $("body").delegate("#DevicePositions","dataBound", DevicePositionsDataBound);
+        //End Bind
+
+        var onGridDevicePositionsChange = function () {
+            console.log("onGridDevicePositionsChange");
+        }
+      
+
+    </script>
+
+    <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBto-QEVHk0ognTc3NKSCnhaD1FHYPOIOY&callback=initMap">
+        </script>
+}

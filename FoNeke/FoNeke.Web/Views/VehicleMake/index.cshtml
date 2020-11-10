@@ -1,0 +1,49 @@
+﻿@using EMM.FoNeke.Common.Extentions
+@using FoNeke.Web.Models.Vehicles
+@model FoNeke.Web.Controllers.VehicleMake.ViewModels.VehicleMakeViewModel
+
+
+@section Scripts
+{
+    <script>
+        $("#GridVehicleMakeAddBtn").GridAddLine();
+        $("#GridVehicleMakeEditBtn").GridEditLine();
+        $("#GridVehicleMakeDeleteBtn").GridDeleteLine();
+        SetGridOptions($("#GridVehicleMake"));
+    </script>
+} 
+
+@Html.RenderIndexGridToolbar("VehicleMake")
+
+@(Html.Kendo().Grid<VehicleMake>()
+              .Name("GridVehicleMake")
+              .Events(ev => ev.Change("onGridSelectionChanged").DataBound("onGridDatabound"))
+              .Editable(editable => editable.DisplayDeleteConfirmation(false))
+              .Columns(columns =>
+                      {
+                          //columns.Bound(p => p.Name).ClientTemplate("#=GridDisplayBaseEntity(data.Name)#").ClientGroupHeaderTemplate("#=GridDisplayBaseEntity(value)#");  
+                          columns.Bound(p => p.Make); 
+                      })
+              .Resizable(resize => resize.Columns(true))
+              .Groupable()
+              .Selectable()
+              .Editable(editable => editable.Mode(GridEditMode.PopUp))
+               .Pageable(pageable => pageable
+                                    .Refresh(true)
+                                    .ButtonCount(5))
+              .Sortable()
+              .Scrollable()
+              .Filterable()
+              .DataSource(dataSource => dataSource
+                            .Ajax()
+                            .AutoSync(true)
+                            .Batch(true)
+                            .ServerOperation(false)
+                            .PageSize(15)
+                            .Model(m => m.Id(p => p.Id))
+                            .Create(update => update.Action("Edit", "VehicleMake"))
+                            .Update(update => update.Action("Edit", "VehicleMake"))
+                            .Destroy(update => update.Action("GridDelete", "VehicleMake"))
+                            .Read(read => read.Action("GridGet","VehicleMake"))))
+
+
